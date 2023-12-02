@@ -1,5 +1,5 @@
 # PythonHelloWorld
 
-This year i am using the Advent of Code games to learn Python.
+This year I'm using the Advent of Code games to learn Python.
 
-Intentions are to make better readable solutions every day ... wish me luck.
+Intention is to make better readable solutions every day ... wish me luck.
