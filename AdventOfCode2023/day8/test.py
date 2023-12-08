@@ -12,8 +12,8 @@ class MyFirstTests(unittest.TestCase):
     def test_part1i(self):
         self.assertEqual(part1("input"), 20569)
     
-    # def test_part2(self):
-    #     self.assertEqual(part2("sampleinput3"), 6)
+    def test_part2(self):
+        self.assertEqual(part2("sampleinput3"), 6)
 
     def test_part2i(self):
         self.assertEqual(part2("input"), 111)

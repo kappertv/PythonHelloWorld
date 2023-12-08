@@ -14,17 +14,17 @@ def simultaniousStepsA2Z(instructions, nodes) -> int:
     print(count)
     allNodesEndWithZ = len(list(filter(lambda n: n.node.endswith('Z'), startNodes))) == count
    #  print(allNodesEndWithZ)
-    while not allNodesEndWithZ and steps < 100000000:
-        # newNodes = []
-        # if instructions[steps % len(instructions)] == 'L': #left
-        #     for n in startNodes:
-        #         newNodes.append(next(x for x in nodes if x.node == n.left))
-        # else:
-        #     for n in startNodes:
-        #         newNodes.append(next(x for x in nodes if x.node == n.right))
-        # startNodes = newNodes
-        # endz = len(list(filter(lambda n: n.node.endswith('Z'), startNodes)))
-        # allNodesEndWithZ = endz == count
+    while not allNodesEndWithZ and steps < 100000:
+        newNodes = []
+        if instructions[steps % len(instructions)] == 'L': #left
+            for n in startNodes:
+                newNodes.append(next(x for x in nodes if x.node == n.left))
+        else:
+            for n in startNodes:
+                newNodes.append(next(x for x in nodes if x.node == n.right))
+        startNodes = newNodes
+        endz = len(list(filter(lambda n: n.node.endswith('Z'), startNodes)))
+        allNodesEndWithZ = endz == count
         steps = steps + 1
 
     for n in startNodes:
