@@ -8,27 +8,29 @@ class Node:
         return f'Node({self.node},{self.left},{self.right})'
 
 def simultaniousStepsA2Z(instructions, nodes) -> int:
-    steps = 0    
-    startNodes = list(filter(lambda n: n.node.endswith('A'), nodes))
-    count = len(startNodes)
-    print(count)
-    allNodesEndWithZ = len(list(filter(lambda n: n.node.endswith('Z'), startNodes))) == count
+    steps = 0
+    startKeys = list(filter(lambda k: k.endswith('A'), nodes.keys()))
+    count = len(startKeys)
+    allNodesEndWithZ = len(list(filter(lambda k: k.endswith('Z'), startKeys))) == count
    #  print(allNodesEndWithZ)
-    while not allNodesEndWithZ and steps < 100000:
-        newNodes = []
+    while not allNodesEndWithZ and steps < 10:
+        print(len(startKeys))
+        for n in startKeys:
+            print(f'{n}: {nodes[n]}')
+        newKeys = []
         if instructions[steps % len(instructions)] == 'L': #left
-            for n in startNodes:
-                newNodes.append(next(x for x in nodes if x.node == n.left))
+            print('left')
+            for n in startKeys:
+                newKeys.append(nodes[n][0])
         else:
-            for n in startNodes:
-                newNodes.append(next(x for x in nodes if x.node == n.right))
-        startNodes = newNodes
-        endz = len(list(filter(lambda n: n.node.endswith('Z'), startNodes)))
+            print('right')
+            for n in startKeys:
+                newKeys.append(nodes[n][1])
+        startKeys = newKeys
+        endz = len(list(filter(lambda k: k.endswith('Z'), startKeys))) 
         allNodesEndWithZ = endz == count
         steps = steps + 1
 
-    for n in startNodes:
-        print(n)
     
     return steps
 
@@ -69,15 +71,18 @@ def part1(input) -> int:
     return stepsFromAAA2ZZZ(instructions, nodes)
 
 def part2(input) -> int:
-    nodes = []
     with open(input) as f:
         data = f.read().strip()
         lines = data.split("\n")
         instructions = lines[0]
-
+        
+        nodes = {}
+        
         for line in lines[2:]:
             s = line.split(" = ")
             lr = s[1].translate(dict.fromkeys(map(ord, '()'), None)).split(",")
-            nodes.append(Node(s[0], lr[0], lr[1].strip()))
-    
+            nodes[s[0]] = (lr[0], lr[1].strip())
+           # nodes.append(Node(s[0], lr[0], lr[1].strip()))
+    # print(nodes.keys())
+    # print(nodes.values())
     return simultaniousStepsA2Z(instructions, nodes)

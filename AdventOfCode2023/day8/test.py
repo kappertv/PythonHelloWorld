@@ -16,7 +16,7 @@ class MyFirstTests(unittest.TestCase):
         self.assertEqual(part2("sampleinput3"), 6)
 
     def test_part2i(self):
-        self.assertEqual(part2("input"), 111)
+        self.assertEqual(part2("input"), 21366921060721)
     
     # 10_000_000 too low 14 minuten.
     # 100_000_000 ..
